@@ -5,6 +5,7 @@ const formato = require('../models/formato');
 const modulo = require('../models/modulo');
 const variedad = require('../models/variedad');
 const tratamiento = require('../models/tratamiento');
+const registro = require('../models/registro');
 const { connectDB } = require('../database');
 
 connectDB();
@@ -70,7 +71,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó acopio"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -92,7 +93,7 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró acopio"
             });
             return res.status(200).send({
                 status: "S",
@@ -114,7 +115,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó proceso"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -136,7 +137,7 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró proceso"
             });
             return res.status(200).send({
                 status: "S",
@@ -159,7 +160,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó formato"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -181,7 +182,7 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró formato"
             });
             return res.status(200).send({
                 status: "S",
@@ -203,7 +204,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó modulo"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -225,7 +226,7 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró modulo"
             });
             return res.status(200).send({
                 status: "S",
@@ -247,7 +248,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó variedad"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -269,7 +270,7 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró variedad"
             });
             return res.status(200).send({
                 status: "S",
@@ -277,7 +278,8 @@ var usuarioController = {
             });
         })
     },
-    //tratamiento
+
+    //TRATAMIENTO
     agregartratamiento: function (req, res) {
         const tratamientobody = req.body;
         var nuevotratamiento = new tratamiento();
@@ -290,7 +292,7 @@ var usuarioController = {
                 });
                 if (!item) return res.status(200).send({
                     status: "W",
-                    response: "No se guardó usuario"
+                    response: "No se guardó tratamiento"
                 });
                 return res.status(200).send({
                     status: "S",
@@ -312,7 +314,85 @@ var usuarioController = {
             });
             if (item.length == 0) return res.status(200).send({
                 status: "W",
-                response: "No se encontró usuario"
+                response: "No se encontró tratamiento"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
+    },
+
+    //REGISTRO
+    agregarregistro: function (req, res) {
+        const registrobody = req.body;
+        var nuevoregistro = new registro();
+        nuevoregistro.placa=registrobody.placa;
+        nuevoregistro.modelo=registrobody.modelo;
+        nuevoregistro.placa2=registrobody.placa2||"";
+        nuevoregistro.modelo2=registrobody.modelo2||"",
+        nuevoregistro.usuario=registrobody.usuario;
+        nuevoregistro.emptransporte=registrobody.emptransporte||"";
+        nuevoregistro.licencia=registrobody.licencia||"";
+        nuevoregistro.chofer=registrobody.chofer||"";
+        nuevoregistro.lugarp=registrobody.lugarp;
+        nuevoregistro.acopio=registrobody.acopio;
+        nuevoregistro.pallet=registrobody.pallet;
+        nuevoregistro.formato=registrobody.formato;
+        nuevoregistro.peso=registrobody.peso;
+        nuevoregistro.tratamiento=registrobody.tratamiento;
+        nuevoregistro.modulo=registrobody.modulo;
+        nuevoregistro.variedad=registrobody.variedad;
+        nuevoregistro.cantidad=registrobody.cantidad;
+        nuevoregistro.pesototal=registrobody.pesototal;
+        nuevoregistro.fecharegistro=registrobody.fecharegistro;
+        nuevoregistro.fechaguia=registrobody.fechaguia||"";
+        nuevoregistro.guia=registrobody.guia||"";
+        console.log(nuevoregistro);
+        if (nuevoregistro.placa &&
+            nuevoregistro.usuario &&
+            nuevoregistro.acopio &&
+            nuevoregistro.pallet &&
+            nuevoregistro.formato &&
+            nuevoregistro.peso &&
+            nuevoregistro.tratamiento &&
+            nuevoregistro.modulo &&
+            nuevoregistro.variedad &&
+            nuevoregistro.cantidad &&
+            nuevoregistro.pesototal &&
+            nuevoregistro.fecharegistro) {
+            nuevoregistro.save((err, item) => {
+                if (err) return res.status(500).send({
+                    status: "W",
+                    response: "Error en la consulta"
+                });
+                if (!item) return res.status(200).send({
+                    status: "W",
+                    response: "No se guardó registro"
+                });
+                return res.status(200).send({
+                    status: "S",
+                    response: item
+                });
+            })
+        } else {
+            return res.status(200).send({
+                status: "W",
+                response: "input no válido"
+            });
+        }
+    },
+    consultarregistro: function (req, res) {
+        const usuarioid = req.params.usuarioid;
+        const placaid = req.params.placaid;
+        registro.find({usuario:usuarioid,placa:placaid,guia:""}).exec((err, item) => {
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta"
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
             });
             return res.status(200).send({
                 status: "S",

@@ -26,4 +26,7 @@ router.get('/consultarvariedad', usuarioControllers.consultarvariedad);
 //tratamiento
 router.post('/agregartratamiento', usuarioControllers.agregartratamiento);
 router.get('/consultartratamiento', usuarioControllers.consultartratamiento);
+//registro
+router.post('/agregarregistro', usuarioControllers.agregarregistro);
+router.get('/consultarregistro/:usuarioid/:placaid', usuarioControllers.consultarregistro);
 module.exports = router; 
