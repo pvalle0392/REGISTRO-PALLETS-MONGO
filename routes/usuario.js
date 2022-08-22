@@ -26,4 +26,4 @@ router.get('/consultarvariedad', usuarioControllers.consultarvariedad);
 //tratamiento
 router.post('/agregartratamiento', usuarioControllers.agregartratamiento);
 router.get('/consultartratamiento', usuarioControllers.consultartratamiento);
-module.exports = router;
+module.exports = router; 
