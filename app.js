@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router_usuario = require('./routes/usuario')
+const {connectDB} = require('./database')
 var app = express();
 
-//rutas
+//Conexion a la base  de datos
+connectDB();
 
 //middlewares
 app.use(bodyParser.urlencoded({extended:false}));

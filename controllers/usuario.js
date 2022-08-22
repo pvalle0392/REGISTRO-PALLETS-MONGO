@@ -345,7 +345,7 @@ var usuarioController = {
         nuevoregistro.variedad=registrobody.variedad;
         nuevoregistro.cantidad=registrobody.cantidad;
         nuevoregistro.pesototal=registrobody.pesototal;
-        nuevoregistro.fecharegistro=registrobody.fecharegistro;
+        nuevoregistro.fecharegistro=new Date();
         nuevoregistro.fechaguia=registrobody.fechaguia||"";
         nuevoregistro.guia=registrobody.guia||"";
         console.log(nuevoregistro);
@@ -399,6 +399,41 @@ var usuarioController = {
                 response: item
             });
         })
+    },
+    listarregistro:function(req,res){
+        registro.find({guia:""}).exec((err, item) => {
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta"
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
+    },
+    generarguia: function(req,res){
+        const placaid = req.params.placaid;
+        const presintoid = req.params.presintoid;
+        const guiaid = 'G-' + presintoid + '-' + new Date();
+        if(!placaid) return res.status(200).send({type:"W",message:"la placa no puede estar vacía"});
+        registro.find({placa:placaid,guia:""}).exec((err,items)=>{
+            if(err) return res.status(500).send({type:"W",response:err});
+            if(items.length == 0) return res.status(200).send({type:"W",response:"sin registros para generar guía para la placa"});
+            registro.update({placa:placaid,guia:""},{$set:{guia:guiaid,fechaguia:new Date()}},(error,filas)=>{
+                let rows = 0;
+                let mensaje = ''; 
+                if(error) return res.status(500).send({type:"W",response:error});
+                if(filas.length == 0) return res.status(200).send({type:"W",response:"no se creó guía"});
+                rows = filas.length;
+                mensaje = 'filas actualizados' + rows;
+                return res.status(200).send({type:"S",message:mensaje});
+            })
+        });
     }
 }
 

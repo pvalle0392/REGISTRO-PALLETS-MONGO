@@ -29,4 +29,7 @@ router.get('/consultartratamiento', usuarioControllers.consultartratamiento);
 //registro
 router.post('/agregarregistro', usuarioControllers.agregarregistro);
 router.get('/consultarregistro/:usuarioid/:placaid', usuarioControllers.consultarregistro);
+router.get('/listarregistro', usuarioControllers.listarregistro);
+//guia
+router.get('/generarguia/:placaid/:presintoid', usuarioControllers.generarguia);
 module.exports = router; 

@@ -1,0 +1,76 @@
+CONSULTA DE USAURIO
+localhost:3700/api/usuario/agregarusuario
+{
+  "codigo":"CESPINOZA"
+}
+localhost:3700/api/usuario/consultarusuario/PVALLE
+
+ACOPIO
+localhost:3700/api/usuario/agregaracopio
+{
+  "codigoacopio":"6"
+}
+localhost:3700/api/usuario/consultaracopio
+
+LUGAR DE PROCESO
+localhost:3700/api/usuario/agregarlugarproceso
+{
+  "codigoproceso":"BROOW FRIO"
+}
+localhost:3700/api/usuario/consultarlugarproceso
+
+FORMATO
+localhost:3700/api/usuario/agregarformato
+{
+  "codigoformato":"BROOW FRIO",
+  "peso":12
+}
+localhost:3700/api/usuario/consultarformato
+
+MODULO
+localhost:3700/api/usuario/agregarmodulo
+{
+  "codigomodulo":"BROOW FRIO"
+}
+localhost:3700/api/usuario/consultarmodulo
+
+REGISTRO
+localhost:3700/api/usuario/agregarregistro
+{
+"placa":"AFG-098",
+"modelo":"HINO 500",
+"placa2":"",
+"modelo2":"",
+"usuario":"PVALLE",
+"emptransporte":"TIMO",
+"licencia":"A980909098",
+"chofer":"MAITAS",
+"lugarp":"BETA",
+"acopio":"1",
+"pallet":"BO-0001289",
+"formato":"BULK 3.6",
+"peso":3.74,
+"tratamiento":"ORGÁNICO",
+"modulo":"M05",
+"variedad":"VENTURA",
+"cantidad":2,
+"pesototal":7.48,
+"fecharegistro":"Sun Aug 21 2022 22:55:08 GMT-0500",
+"fechaguia":"",
+"guia":""
+}
+localhost:3700/api/usuario/consultarregistro
+
+
+
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarusuario/PVALLE
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultaracopio
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarlugarproceso
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarformato
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarmodulo
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarvariedad
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultartratamiento 
+https://registro-pallets-mongo.herokuapp.com/api/usuario/registrarregistro
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarregistro/ususario/placa
+
+
