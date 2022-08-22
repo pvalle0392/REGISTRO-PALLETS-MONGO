@@ -6,9 +6,9 @@ const modulo = require('../models/modulo');
 const variedad = require('../models/variedad');
 const tratamiento = require('../models/tratamiento');
 const registro = require('../models/registro');
-const { connectDB } = require('../database');
+// const { connectDB } = require('../database');
 
-connectDB();
+// connectDB();
 
 
 var usuarioController = {
