@@ -59,6 +59,7 @@ localhost:3700/api/usuario/agregarregistro
 "fechaguia":"",
 "guia":""
 }
+Formato de fecha y hora: AAAA-MM-DDTHH:MM:SS
 localhost:3700/api/usuario/consultarregistro
 
 
@@ -74,3 +75,8 @@ https://registro-pallets-mongo.herokuapp.com/api/usuario/registrarregistro
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarregistro/ususario/placa
 
 
+
+localhost:3700/api/usuario/generarguia/AFG-098/P654/2022-08-22T08:07:32
+localhost:3700/api/usuario/agregarregistro
+localhost:3700/api/usuario/listarregistro/2022-08-22
+localhost:3700/api/usuario/listarregistroguia/2022-08-22

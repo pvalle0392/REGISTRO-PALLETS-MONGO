@@ -19,8 +19,8 @@ const registro = mongoose.Schema({
     variedad:String,
     cantidad:Number,
     pesototal:Number,
-    fecharegistro:Date,
-    fechaguia:Date,
+    fecharegistro:String,
+    fechaguia:String,
     guia:String
 })
 

@@ -6,6 +6,7 @@ const modulo = require('../models/modulo');
 const variedad = require('../models/variedad');
 const tratamiento = require('../models/tratamiento');
 const registro = require('../models/registro');
+const moment = require('moment-timezone');
 // const { connectDB } = require('../database');
 
 // connectDB();
@@ -326,6 +327,7 @@ var usuarioController = {
     //REGISTRO
     agregarregistro: function (req, res) {
         const registrobody = req.body;
+        let fecha = moment().tz("America/Bogota").format("YYYY-MM-DD");
         var nuevoregistro = new registro();
         nuevoregistro.placa=registrobody.placa;
         nuevoregistro.modelo=registrobody.modelo;
@@ -345,9 +347,9 @@ var usuarioController = {
         nuevoregistro.variedad=registrobody.variedad;
         nuevoregistro.cantidad=registrobody.cantidad;
         nuevoregistro.pesototal=registrobody.pesototal;
-        nuevoregistro.fecharegistro=new Date();
-        nuevoregistro.fechaguia=registrobody.fechaguia||"";
-        nuevoregistro.guia=registrobody.guia||"";
+        nuevoregistro.fecharegistro=fecha ;
+        nuevoregistro.fechaguia="";
+        nuevoregistro.guia="";
         console.log(nuevoregistro);
         if (nuevoregistro.placa &&
             nuevoregistro.usuario &&
@@ -401,7 +403,8 @@ var usuarioController = {
         })
     },
     listarregistro:function(req,res){
-        registro.find({guia:""}).exec((err, item) => {
+        const fecha = req.params.fechaid;//AAAA-MM-DD
+        registro.find({guia:"",fecharegistro:fecha}).exec((err, item) => {
             if (err) return res.status(500).send({
                 status: "W",
                 response: "Error en la consulta"
@@ -419,21 +422,40 @@ var usuarioController = {
     generarguia: function(req,res){
         const placaid = req.params.placaid;
         const presintoid = req.params.presintoid;
-        const guiaid = 'G-' + presintoid + '-' + new Date();
+        const fechahora = moment().tz("America/Bogota").format("YYYY-MM-DD HH:mm:ss");
+        let fecha = moment().tz("America/Bogota").format("YYYY-MM-DD");
+        console.log(fechahora);
+        const guiaid = 'G-' + presintoid + '-' + fechahora;
         if(!placaid) return res.status(200).send({type:"W",message:"la placa no puede estar vacía"});
         registro.find({placa:placaid,guia:""}).exec((err,items)=>{
             if(err) return res.status(500).send({type:"W",response:err});
             if(items.length == 0) return res.status(200).send({type:"W",response:"sin registros para generar guía para la placa"});
-            registro.update({placa:placaid,guia:""},{$set:{guia:guiaid,fechaguia:new Date()}},(error,filas)=>{
-                let rows = 0;
+            registro.update({placa:placaid,guia:""},{$set:{guia:guiaid,fechaguia:fecha}},(error,filas)=>{
                 let mensaje = ''; 
                 if(error) return res.status(500).send({type:"W",response:error});
                 if(filas.length == 0) return res.status(200).send({type:"W",response:"no se creó guía"});
-                rows = filas.length;
-                mensaje = 'filas actualizados' + rows;
+                mensaje = 'Guía ' + guiaid + ' generada';
                 return res.status(200).send({type:"S",message:mensaje});
             })
         });
+    },
+    listarregistroguia: function(req,res){
+        const fecha = req.params.fechaid;
+        console.log(fecha);
+        registro.find({fechaguia:fecha,guia:{$ne:""}}).exec((err, item) => {
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta"
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
     }
 }
 
