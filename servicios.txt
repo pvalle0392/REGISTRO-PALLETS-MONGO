@@ -64,16 +64,18 @@ localhost:3700/api/usuario/consultarregistro
 
 
 
-https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarusuario/PVALLE
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarusuario/{PVALLE}
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultaracopio
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarlugarproceso
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarformato
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarmodulo
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarvariedad
 https://registro-pallets-mongo.herokuapp.com/api/usuario/consultartratamiento 
-https://registro-pallets-mongo.herokuapp.com/api/usuario/registrarregistro
-https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarregistro/ususario/placa
-
+https://registro-pallets-mongo.herokuapp.com/api/usuario/agregarregistro
+https://registro-pallets-mongo.herokuapp.com/api/usuario/consultarregistro/{ususario}/{placa}
+https://registro-pallets-mongo.herokuapp.com/api/usuario/listarregistro/{fecha}
+https://registro-pallets-mongo.herokuapp.com/api/usuario/generarguia/{placa}/{presinto}
+https://registro-pallets-mongo.herokuapp.com/api/usuario/listarregistroguia/{fecha}
 
 
 localhost:3700/api/usuario/generarguia/AFG-098/P654/2022-08-22T08:07:32
