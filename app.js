@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router_usuario = require('./routes/usuario');
 const {connectDB} = require('./database');
-const nodemon = require('nodemon')
 var app = express();
 
 
