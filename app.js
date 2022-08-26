@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router_usuario = require('./routes/usuario')
-const {connectDB} = require('./database')
+const router_usuario = require('./routes/usuario');
+const {connectDB} = require('./database');
+const nodemon = require('nodemon')
 var app = express();
 
+
+// app.use(nodemon)run dev
 //Conexion a la base  de datos
 connectDB();
 //
@@ -23,4 +26,4 @@ app.use(bodyParser.json());
 //rutas
 app.use('/api/usuario',router_usuario);
 //exportar
-module.exports = app;
+module.exports = app; 

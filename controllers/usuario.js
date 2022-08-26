@@ -456,7 +456,50 @@ var usuarioController = {
                 response: item
             });
         })
+    },
+    listarregistro2: function(req,res){
+        const fecha = req.params.fechaid;
+        registro.aggregate([
+            {
+                $match:{fecharegistro:fecha, guia:''}
+            }
+            ,
+            {
+                $group:{_id:"$placa",peso:{$sum:"$pesototal"}}
+            }
+        ]).exec((err,item)=>{
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta",
+                rr:err
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
+    },
+    listarregistroplaca: function(req,res){
+        const placa = req.params.placaid;
+        registro.find({guia:"",placa:placa}).exec((err, item) => {
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta"
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
     }
 }
 
-module.exports = usuarioController;
+module.exports = usuarioController; 
