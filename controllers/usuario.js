@@ -440,9 +440,24 @@ var usuarioController = {
         });
     },
     listarregistroguia: function(req,res){
-        const fecha = req.params.fechaid;
-        console.log(fecha);
-        registro.find({fechaguia:fecha,guia:{$ne:""}}).exec((err, item) => {
+        // const fecha = req.params.fechaid;
+        // console.log(fecha);
+        // registro.find({fechaguia:fecha,guia:{$ne:""}}).exec((err, item) => {
+        //     if (err) return res.status(500).send({
+        //         status: "W",
+        //         response: "Error en la consulta"
+        //     });
+        //     if (item.length == 0) return res.status(200).send({
+        //         status: "W",
+        //         response: "No se encontró registros"
+        //     });
+        //     return res.status(200).send({
+        //         status: "S",
+        //         response: item
+        //     });
+        // })
+        const guiaid = req.params.guiaid;
+        registro.find({guia:guiaid}).exec((err, item) => {
             if (err) return res.status(500).send({
                 status: "W",
                 response: "Error en la consulta"
@@ -508,7 +523,7 @@ var usuarioController = {
             }
             ,
             {
-                $group:{_id:"$placa",peso:{$sum:"$pesototal"}}
+                $group:{_id:{placa:"$placa",guia:"$guia"},peso:{$sum:"$pesototal"}}
             }
         ]).exec((err,item)=>{
             if (err) return res.status(500).send({

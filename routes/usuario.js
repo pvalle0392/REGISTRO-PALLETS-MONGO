@@ -33,7 +33,7 @@ router.get('/consultarregistro/:usuarioid/:placaid', usuarioControllers.consulta
 router.get('/listarregistro/:fechaid', usuarioControllers.listarregistro);
 //guia
 router.get('/generarguia/:placaid/:presintoid', usuarioControllers.generarguia);
-router.get('/listarregistroguia/:fechaid', usuarioControllers.listarregistroguia);
+router.get('/listarregistroguia/:guiaid', usuarioControllers.listarregistroguia);
 //Pruebas
 router.get('/listarregistro2/:fechaid', usuarioController.listarregistro2);
 router.get('/listarregistroplaca/:placaid', usuarioController.listarregistroplaca);
