@@ -37,4 +37,5 @@ router.get('/listarregistroguia/:fechaid', usuarioControllers.listarregistroguia
 //Pruebas
 router.get('/listarregistro2/:fechaid', usuarioController.listarregistro2);
 router.get('/listarregistroplaca/:placaid', usuarioController.listarregistroplaca);
+router.get('/listarguias/:fechaid', usuarioController.listarguias);
 module.exports = router; 

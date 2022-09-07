@@ -499,6 +499,32 @@ var usuarioController = {
                 response: item
             });
         })
+    },
+    listarguias: function(req,res){
+        const fecha = req.params.fechaid;
+        registro.aggregate([
+            {
+                $match:{fecharegistro:fecha, guia:{$ne:""}}
+            }
+            ,
+            {
+                $group:{_id:"$placa",peso:{$sum:"$pesototal"}}
+            }
+        ]).exec((err,item)=>{
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta",
+                rr:err
+            });
+            if (item.length == 0) return res.status(200).send({
+                status: "W",
+                response: "No se encontró registros"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: item
+            });
+        })
     }
 }
 
