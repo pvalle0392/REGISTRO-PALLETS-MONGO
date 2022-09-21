@@ -346,7 +346,7 @@ var usuarioController = {
         nuevoregistro.modulo=registrobody.modulo;
         nuevoregistro.variedad=registrobody.variedad;
         nuevoregistro.cantidad=registrobody.cantidad;
-        nuevoregistro.pesototal=registrobody.pesototal;
+        nuevoregistro.pesototal=registrobody.pesototal.toFixed(2);
         nuevoregistro.fecharegistro=fecha ;
         nuevoregistro.fechaguia="";
         nuevoregistro.guia="";
@@ -383,6 +383,19 @@ var usuarioController = {
                 response: "input no válido"
             });
         }
+    },
+    //ELIMINAR DATOS DE COLECCION REGISTROS
+    truncateregistro: function(req,res){
+        registro.remove({placa:{$ne:""}}).exec((err,item)=>{
+            if (err) return res.status(500).send({
+                status: "W",
+                response: "Error en la consulta"
+            });
+            return res.status(200).send({
+                status: "S",
+                response: ""
+            });
+        });
     },
     consultarregistro: function (req, res) {
         const usuarioid = req.params.usuarioid;

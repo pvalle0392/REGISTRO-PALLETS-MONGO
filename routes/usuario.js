@@ -31,6 +31,7 @@ router.get('/consultartratamiento', usuarioControllers.consultartratamiento);
 router.post('/agregarregistro', usuarioControllers.agregarregistro);
 router.get('/consultarregistro/:usuarioid/:placaid', usuarioControllers.consultarregistro);
 router.get('/listarregistro/:fechaid', usuarioControllers.listarregistro);
+router.get('/truncateregistro', usuarioControllers.truncateregistro);
 //guia
 router.get('/generarguia/:placaid/:presintoid', usuarioControllers.generarguia);
 router.get('/listarregistroguia/:guiaid', usuarioControllers.listarregistroguia);
