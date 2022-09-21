@@ -350,7 +350,7 @@ var usuarioController = {
         nuevoregistro.fecharegistro=fecha ;
         nuevoregistro.fechaguia="";
         nuevoregistro.guia="";
-        console.log(nuevoregistro);
+        // console.log(nuevoregistro);
         if (nuevoregistro.placa &&
             nuevoregistro.usuario &&
             nuevoregistro.acopio &&
